@@ -1,4 +1,6 @@
 # Advent-of-Code
 Solutions to Advent of Code puzzles
 
-Not much to read for now
+All challenges are to be found at http://adventofcode.com/
+
+Solutions in Javascript (for now)
