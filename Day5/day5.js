@@ -5,6 +5,8 @@
 
 // WILL NOT WORK! NEED TO KEEP CHECKING FOR SAME VOWEL MULTIPLE TIMES
 
+//doesn't show up as nice. why?
+
 //First Condition
 // Tests if letter is a vowel
 

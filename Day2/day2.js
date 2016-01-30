@@ -3,6 +3,8 @@ var input = ["4x23x21", "22x29x19", "11x4x11", "8x10x5", "24x18x16", "11x25x22",
 var paper = 0;
 var ribbon = 0;
 
+//refactor: do function to calculate ribbon and paper sizes
+
 input.forEach(function(entry) {
 	dimensions = entry.split("x");
 	var l = dimensions[0];
