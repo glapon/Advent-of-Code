@@ -17,6 +17,8 @@ console.log(floor);
 var input = "";
 var floor = 0;
 
+//refactor splitting array .split('') then use forEach
+
 //ending floor
 for (i = 0; i < input.length && floor > -1; i++) {
 	if (input[i] === "(") {
