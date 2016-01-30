@@ -16,7 +16,7 @@ while (!number) {
 	
 	var hasher = crypto.createHash('md5');
 	hasher.update(input + counter, 'ascii');
-    var hash = hasher.digest('hex');
+	var hash = hasher.digest('hex');
 
 	if (hash.startsWith('00000')) { //test to see if it has 5 zeroes at beginning
 		number = counter;
