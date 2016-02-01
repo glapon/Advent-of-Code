@@ -13,7 +13,7 @@ let floor_functions = {
 	")": (floor) => { return floor - 1; }
 };
 
-inputArray.forEach((move) => { currentFloor = floor_functions[currentFloor]; });
+inputArray.forEach((move) => { currentFloor = floor_functions[move](currentFloor); });
 
 console.log(currentFloor);
 
