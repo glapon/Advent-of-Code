@@ -15,8 +15,22 @@ let moveFunctions = {
     "<": (coord) => { return [coord[0] - 1, coord[1]]; }
 };
 
-let coords = _.transform(inputArray, (coords, move, index) => {
+//why don't these work?
+let realSanta = _.reduce(inputArray, (string, value, index) => {
+    if (index % 2 == 0) { return string + value; };
+}, '');
+
+let robotSanta = _.reduce(inputArray, (string, value, index) => {
+    if (index % 2 == 1) { return string + value; };
+}, '');
+
+
+let realCoords = _.transform(realSanta, (coords, move, index) => {
     coords.push(moveFunctions[move](coords[index]));
 }, [[0,0]]);
 
-console.log(_.intersectionWith(coords, coords, _.isEqual).length);
+let robotCoords = _.transform(robotSanta, (coords, move, index) => {
+    coords.push(moveFunctions[move](coords[index]));
+}, [[0,0]]);
+
+console.log(_.intersectionWith(realCoords, robotCoords, _.isEqual).length);
