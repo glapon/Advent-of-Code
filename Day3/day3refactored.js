@@ -15,16 +15,18 @@ let moveFunctions = {
     "<": (coord) => { return [coord[0] - 1, coord[1]]; }
 };
 
-//why don't these work?
+//change to transform??
 let realSanta = _.reduce(inputArray, (string, value, index) => {
-    if (index % 2 == 0) { return string + value; };
+    if (index % 2 == 0) { return string + value; }
+    else { return string; };
 }, '');
 
 let robotSanta = _.reduce(inputArray, (string, value, index) => {
-    if (index % 2 == 1) { return string + value; };
+    if (index % 2 == 1) { return string + value; }
+    else { return string; };
 }, '');
 
-
+//Problem: getting 199, which is too small!
 let realCoords = _.transform(realSanta, (coords, move, index) => {
     coords.push(moveFunctions[move](coords[index]));
 }, [[0,0]]);
@@ -33,4 +35,4 @@ let robotCoords = _.transform(robotSanta, (coords, move, index) => {
     coords.push(moveFunctions[move](coords[index]));
 }, [[0,0]]);
 
-console.log(_.intersectionWith(realCoords, robotCoords, _.isEqual).length);
+console.log(_.unionWith(realCoords, robotCoords, _.isEqual).length);
