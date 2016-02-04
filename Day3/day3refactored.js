@@ -15,7 +15,6 @@ let moveFunctions = {
     "<": (coord) => { return [coord[0] - 1, coord[1]]; }
 };
 
-//change to transform??
 let realSanta = _.reduce(inputArray, (string, value, index) => {
     if (index % 2 == 0) { return string + value; }
     else { return string; };
@@ -26,7 +25,6 @@ let robotSanta = _.reduce(inputArray, (string, value, index) => {
     else { return string; };
 }, '');
 
-//Problem: getting 199, which is too small!
 let realCoords = _.transform(realSanta, (coords, move, index) => {
     coords.push(moveFunctions[move](coords[index]));
 }, [[0,0]]);
