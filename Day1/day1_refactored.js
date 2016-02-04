@@ -12,11 +12,11 @@ let floorFunctions = {
     ")": (floor) => { return floor - 1 }
 };
 
-var firstBasement = [];
+let firstBasement;
 
 let lastFloor = _.reduce(inputArray, (floor, move, index) => { 
-    if (typeof(firsBasement) == "undefined" && floor == -1) { firstBasement.push(index); };
+    if (typeof(firstBasement) == "undefined" && floor == -1) { firstBasement = index; };
     return floorFunctions[move](floor); 
 }, 0);
 
-console.log(lastFloor + " is the last floor and " + firstBasement[0] + " was the first to hit the basement.");
+console.log(lastFloor + " is the last floor and " + firstBasement + " was the first to hit the basement.");
