@@ -8,15 +8,13 @@ let input = "()()(()()()(()()((()((()))((()((((()()((((()))()((((())(((((((()(((
 let inputArray = input.trim().split(''); // make input into array of moves
 
 let floorFunctions = {
-    "(": (floor) => { return floor + 1 },
-    ")": (floor) => { return floor - 1 }
+    "(": 1,
+    ")": -1
 };
 
-let firstBasement;
+let allFloors = _.transform(inputArray, (floors, move, index) => {
+    floors.push(floors[index] + floorFunctions[move]);
+}, [0]);
 
-let lastFloor = _.reduce(inputArray, (floor, move, index) => { 
-    if (typeof(firstBasement) == "undefined" && floor == -1) { firstBasement = index; };
-    return floorFunctions[move](floor); 
-}, 0);
-
-console.log(lastFloor + " is the last floor and " + firstBasement + " was the first to hit the basement.");
+console.log("Last floor: " + allFloors[allFloors.length - 1]);
+console.log("First to hit basement: " + allFloors.indexOf(-1));
