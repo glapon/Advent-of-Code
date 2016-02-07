@@ -32,13 +32,13 @@ let twoInRow = (word) => {
     let wordArray = word.trim().split('');
 
     let pairTest = _.transform(wordArray, (result, letter, index, array) => {
-        if (letter == array[index + 1]) { result.push(letter) };
+        if (letter == array[index + 1]) { result.push(letter); };
     }, []);
 
     if (pairTest.length > 0) { return true; };
 };
 
-//checks for forbidden letters (PROBLEM IS HERE!)
+//checks for forbidden letters
 
 let noneForbidden = (word) => {
     let badLetters = ['ab', 'cd', 'pq', 'xy'];
@@ -47,13 +47,39 @@ let noneForbidden = (word) => {
         if (word.indexOf(pair) > -1) { result.push(pair); };
     }, []);
 
-    if (badTest.length == 0) { return true;};
+    if (badTest.length == 0) { return true; };
+};
+
+// part 2: pair repeats once without overlapping
+
+let repeatingPair = (word) => {
+    let wordArray = word.trim().split('');
+
+    let pairs = _.transform(wordArray, (result, letter, index, array) => {
+        if ( word.indexOf(letter + array[index + 1], index + 2) > -1) { result.push(letter); };
+    }, []);
+
+    if (pairs.length > 0) { return true; };
+}
+
+//part 2: one letter that repeats with one between
+
+let oneBetween = (word) => {
+    let wordArray = word.trim().split('');
+
+    let between = _.transform(wordArray, (result, letter, index, array) => {
+        if (letter == array[index + 2]) { result.push(letter); };
+    }, []);
+
+    if (between.length > 0) { return true; };
 };
 
 // check input for bad words
 
 let niceWords = _.transform(input, (result, word) => {
-    if( threeVowels(word) && twoInRow(word) && noneForbidden(word)) { result.push(word); };
-}, []);
+    if (threeVowels(word) && twoInRow(word) && noneForbidden(word)) { result.part1++; };
+    if (repeatingPair(word) && oneBetween(word)) { result.part2++; };
+}, { part1: 0, part2: 0 });
 
-console.log(niceWords.length);
+console.log("Part 1 nice word count: " + niceWords.part1);
+console.log("Part 2 nice word count: " + niceWords.part2);

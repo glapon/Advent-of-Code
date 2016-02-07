@@ -16,7 +16,7 @@ let hashFunction = (string) => { // returns MD5 hash of input
 
 let firstStartsWith = (number, string, tester) => {
     for (number; true; number++) {
-        let md5 = hashFunction(string + number)
+        let md5 = hashFunction(string + number);
         if(md5.startsWith(tester)) { return number; };
     };
 };
