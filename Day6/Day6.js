@@ -16,10 +16,10 @@ let grid = _.times(1000, () => { return _.times(1000, _.constant(false))});
 
 let makeInstruct = (string) => { //works
     let instructions = {};
-    instructions.firstColumn = string.slice(0, string.indexOf(','));
-    instructions.lastColumn = string.slice(string.lastIndexOf('h') + 2, string.lastIndexOf(','));
-    instructions.firstRow = string.slice(string.indexOf(',') + 1, string.indexOf(' '));
-    instructions.lastRow = string.slice(string.lastIndexOf(',') + 1);
+    instructions.firstColumn = + string.slice(0, string.indexOf(','));
+    instructions.lastColumn = + string.slice(string.lastIndexOf('h') + 2, string.lastIndexOf(','));
+    instructions.firstRow = + string.slice(string.indexOf(',') + 1, string.indexOf(' '));
+    instructions.lastRow = + string.slice(string.lastIndexOf(',') + 1);
     return instructions;
 };
 
