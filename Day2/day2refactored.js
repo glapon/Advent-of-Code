@@ -19,6 +19,6 @@ let ribbonAmount = (dimensions) => { //shortest perimeter of one side + volume
 
 _.transform(input, (totals, dimensionsString) => {
     dimensions = dimensionsString.split("x");
-    totals["paper"] += paperAmount(dimensions);
-    totals["ribbon"] += ribbonAmount(dimensions);
-}, {"paper": 0, "ribbon": 0});
+    totals.paper += paperAmount(dimensions);
+    totals.ribbon += ribbonAmount(dimensions);
+}, {paper: 0, ribbon: 0});

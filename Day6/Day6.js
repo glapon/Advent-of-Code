@@ -14,7 +14,7 @@ let grid = _.times(1000, () => { return _.times(1000, _.constant(false))});
 
 //maybe change reliance on hard coding slice in case input is off?
 
-let makeInstruct = (string) => { //works
+let makeInstruct = (string) => {
     let instructions = {};
     instructions.firstColumn = + string.slice(0, string.indexOf(','));
     instructions.lastColumn = + string.slice(string.lastIndexOf('h') + 2, string.lastIndexOf(','));
@@ -25,7 +25,6 @@ let makeInstruct = (string) => { //works
 
 let turnOn = (instruction, grid) => {
     let coords = makeInstruct(instruction.slice(8));
-    //way to do this without for loops?
     for (let x = coords.firstColumn; x <= coords.lastColumn; x++) {
         for (let y = coords.firstRow; y <= coords.lastRow; y++) {
             grid[x][y] = true;
@@ -36,7 +35,6 @@ let turnOn = (instruction, grid) => {
 
 let turnOff = (instruction, grid) => {
     let coords = makeInstruct(instruction.slice(9));
-    //way to do this without for loops?
     for (let x = coords.firstColumn; x <= coords.lastColumn; x++) {
         for (let y = coords.firstRow; y <= coords.lastRow; y++) {
             grid[x][y] = false;
@@ -47,7 +45,6 @@ let turnOff = (instruction, grid) => {
 
 let toggle = (instruction, grid) => {
     let coords = makeInstruct(instruction.slice(7));
-    //way to do this without for loops?
     for (let x = coords.firstColumn; x <= coords.lastColumn; x++) {
         for (let y = coords.firstRow; y <= coords.lastRow; y++) {
             grid[x][y] = !grid[x][y];
@@ -61,9 +58,6 @@ let finalLights = _.reduce(input, (result, instruction) => {
     else if (instruction.startsWith('turn off')) { return turnOff(instruction, result); }
     else { return toggle(instruction, result); };    
 }, grid);
-
-// getting 537821 but the number is too low. the count is likely correct (got it with for loops) so the problem is above?
-//But it's working fine when i test it with various numbers...can't figure it out
 
 let lightsOn = _.reduce(finalLights, (result, column) => {
     return _.reduce(column, (innerResult, element) => {
