@@ -4,29 +4,21 @@ let _ = require('lodash');
 
 let presentsCap = 33100000;
 
-
 let factorize = (number) => {
     if (number == 1) { return [1]; }
     else if (number < 4) { return [1, number]; }
     else if (number == 4) {return [1, 2, 4]; };
-
-    let possibles = _.range(2, Math.floor(number/2));
-
-    let factors = _.transform(possibles, (factors, element) => {
-        if ( number % element == 0) { factors.push(element, number/element); };
+    
+    //only need to look at numbers <= half the number
+    return _.transform(_.range(2, Math.floor(Math.sqrt(number))), (factors, element) => {
+        if ( number % element == 0 && factors.indexOf(element) == -1) { factors.push(element, number/element); };
     }, [1,number]);
-
-    return (_.unionWith(factors, factors, _.isEqual)); //speed up by removing need? (12 as example)
 };
 
 let presentSum = (number) => {
-    let factors = factorize(number);
-
-    let totalPresents = _.reduce(factors, (result, factor) => {
-        return result + factor * 10;
-    }, 0);
-
-    return totalPresents;
+    return _.reduce(factorize(number), (result, factor) => {
+        return result + factor;
+    }, 0) * 10;
 };
 
 let houseCounter = (cap) => {
