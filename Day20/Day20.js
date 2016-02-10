@@ -9,7 +9,6 @@ let factorize = (number) => {
     else if (number < 4) { return [1, number]; }
     else if (number == 4) {return [1, 2, 4]; };
     
-    //only need to look at numbers <= half the number
     return _.transform(_.range(2, Math.floor(Math.sqrt(number))), (factors, element) => {
         if ( number % element == 0 && factors.indexOf(element) == -1) { factors.push(element, number/element); };
     }, [1,number]);
@@ -22,7 +21,7 @@ let presentSum = (number) => {
 };
 
 let houseCounter = (cap) => {
-    for ( let house = 1; true; house++) { // to speed this up, is there a number, based on value of cap, to start at higher than 1?
+    for ( let house = 1; true; house++) {
         if (presentSum(house) >= cap) { return house; };
     };
 };
