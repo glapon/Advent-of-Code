@@ -10,14 +10,14 @@ let factorize = (number) => {
     else if (number == 4) {return [1, 2, 4]; };
     
     return _.transform(_.range(2, Math.floor(Math.sqrt(number))), (factors, element) => {
-        if ( number % element == 0 ) { factors.push(element, number/element); };
-    }, [1, number]);
+        if ( number % element == 0 && number / element <= 50 ) { factors.push(element, number/element); };
+    }, [1,number]);
 };
 
 let presentSum = (number) => {
     return _.reduce(factorize(number), (result, factor) => {
         return result + factor;
-    }, 0) * 10;
+    }, 0) * 11;
 };
 
 let houseCounter = (cap) => {
