@@ -10,13 +10,14 @@ let factorize = (number) => {
     else if (number == 4) {return [1, 2, 4]; };
     
     return _.transform(_.range(2, Math.floor(Math.sqrt(number))), (factors, element) => {
-        if ( number % element == 0 && number / element <= 50 ) { factors.push(element, number/element); };
-    }, [1,number]);
+        if ( number % element == 0 ) { factors.push(element, number/element); };
+    }, [1, number]);
 };
 
 let presentSum = (number) => {
     return _.reduce(factorize(number), (result, factor) => {
-        return result + factor;
+        if (number <= factor * 50) { return result + factor; }
+        else { return result; };
     }, 0) * 11;
 };
 

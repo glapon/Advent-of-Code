@@ -3,7 +3,7 @@
 let _ = require('lodash');
 
 let presentsCap = 33100000;
-
+//idea: memoize to speed up factorize?
 let factorize = (number) => {
     if (number == 1) { return [1]; }
     else if (number < 4) { return [1, number]; }
