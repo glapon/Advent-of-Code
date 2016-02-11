@@ -24,3 +24,6 @@ let translateForty = (input, counter) => {
 };
 
 let answer = translateForty(input, 0).length;
+
+//this takes a LONG time...hmmm
+let part2 = translateForty(input, -10).length;
