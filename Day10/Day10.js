@@ -23,7 +23,13 @@ let translateForty = (input, counter) => {
     else { return translateForty(translate(input), counter + 1); };
 };
 
+let translateFifty = (input, counter) => {
+    if (counter == 50) { return input; }
+    else { return translateForty(translate(input), counter + 1); };
+};
+
 let answer = translateForty(input, 0).length;
 
-//this takes a LONG time...hmmm
-let part2 = translateForty(input, -10).length;
+let answerPart2 = translateFifty(input, 0).length; //takes a long time...refactor?
+
+
