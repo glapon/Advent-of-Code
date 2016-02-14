@@ -1,4 +1,4 @@
-//Did part 1, need to do part 2
+//Does part 2...refactor part 1?
 
 
 "use strict";
