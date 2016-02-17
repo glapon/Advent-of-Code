@@ -134,3 +134,20 @@ while (true) {
 };
 
 a;
+//part 2
+
+for (let index = 0; index < toDeclare.length; index++) {
+    global[toDeclare[index]] = undefined;
+};
+
+b = 3176;
+
+while (true) {
+    for (let index = 0; index < circuits.length; index++) {
+        if ( _.transform(circuits[index].dependencies, (result, element) => {
+            if (typeof global[element] == 'undefined') { result.push(element);};
+        }, []).length == 0 && circuits[index].defined != 'b') { global[circuits[index].defined] = circuits[index].compute() ; console.log(circuits[index]. defined + global[circuits[index].defined])};    
+    };
+
+    if(typeof global['a'] !== 'undefined') { break; }; // breaks once a is defined
+};
