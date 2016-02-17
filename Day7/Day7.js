@@ -120,9 +120,6 @@ for (let index = 0; index < toDeclare.length; index++) {
     global[toDeclare[index]] = undefined;
 };
 
-
-// problem: this isn't working. it's failing when it gets to s. 1 and r = s? or L and r????
-
 while (true) {
     for (let index = 0; index < circuits.length; index++) {
         if ( _.transform(circuits[index].dependencies, (result, element) => {
@@ -130,7 +127,7 @@ while (true) {
         }, []).length == 0) { global[circuits[index].defined] = circuits[index].compute() ; console.log(circuits[index]. defined + global[circuits[index].defined])};    
     };
 
-    if(typeof global['a'] !== 'undefined') { break; }; // breaks once a is defined
+    if(typeof global['a'] !== 'undefined') { break; };
 };
 
 a;
