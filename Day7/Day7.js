@@ -135,9 +135,10 @@ while (true) {
         //and assign that value to the variable to be defined in that circuit.
         //log to console the variable defined to see the process at work
         //if one or more of the dependencies are still undefined skip computing the value this time around
+        //if variable to be defined is already defined, skip assigning value to it again
         if ( _.transform(circuits[index].dependencies, (result, element) => {
             if (typeof global[element] == 'undefined') { result.push(element);};
-        }, []).length == 0) { global[circuits[index].defined] = circuits[index].compute() ; console.log(circuits[index].defined + global[circuits[index].defined])};    
+        }, []).length == 0 && global[circuits[index].defined] == 'undefined') { global[circuits[index].defined] = circuits[index].compute();};
     };
     //if a has been defined we can stop. otherwise keep going
     if(typeof global['a'] !== 'undefined') { break; };
@@ -154,11 +155,12 @@ for (let index = 0; index < toDeclare.length; index++) {
 
 b = 3176;
 
+// same, except skip defining b
 while (true) {
     for (let index = 0; index < circuits.length; index++) {
         if ( _.transform(circuits[index].dependencies, (result, element) => {
             if (typeof global[element] == 'undefined') { result.push(element);};
-        }, []).length == 0 && circuits[index].defined != 'b') { global[circuits[index].defined] = circuits[index].compute() ; console.log(circuits[index].defined + global[circuits[index].defined])};    
+        }, []).length == 0 && circuits[index].defined != 'b') { global[circuits[index].defined] = circuits[index].compute();};    
     };
 
     if(typeof global['a'] !== 'undefined') { break; }; // breaks once a is defined
