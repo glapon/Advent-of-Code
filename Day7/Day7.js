@@ -140,7 +140,7 @@ while (true) {
         }, []).length == 0) { global[circuits[index].defined] = circuits[index].compute();};
     };
     //if a has been defined we can stop. otherwise keep going
-    if(typeof global['a'] !== 'undefined') { break; };
+    if(typeof a !== 'undefined') { break; };
 };
 
 a; // return value of a
@@ -162,7 +162,7 @@ while (true) {
         }, []).length == 0 && circuits[index].defined != 'b') { global[circuits[index].defined] = circuits[index].compute();};    
     };
 
-    if(typeof global['a'] !== 'undefined') { break; }; // breaks once a is defined
+    if(typeof a !== 'undefined') { break; }; // breaks once a is defined
 };
 
 a; // give value of a again
