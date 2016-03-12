@@ -22,7 +22,7 @@ let assignNumber = (string) => {
     
     return { dependencies: [],
              defined: variable,
-             compute: () => { return +number; }
+             compute: (vars) => { return +number; }
            };
 };
 
@@ -33,7 +33,7 @@ let assignVariable = (string) => {
     
     return { dependencies: [value],
              defined: variable,
-             compute: () => { return global[value]; }
+             compute: (vars) => { return vars[value]; }
            };
 };
 
@@ -45,13 +45,13 @@ let andGate = (string) => {
     if(isNaN(string[0])) {
         return { dependencies: [input1, input2],
                  defined: variable,
-                 compute: () => { return global[input1] & global[input2]; }
+                 compute: (vars) => { return vars[input1] & vars[input2]; }
                };
     }
     else {
         return { dependencies: [input2],
                  defined: variable,
-                 compute: () => { return +input1 & global[input2]; }
+                 compute: (vars) => { return +input1 & vars[input2]; }
                };
     };
 };
@@ -64,7 +64,7 @@ let orGate = (string) => {
 
     return { dependencies: [input1, input2],
              defined: variable,
-             compute: () => { return global[input1] | global[input2]; }
+             compute: (vars) => { return vars[input1] | vars[input2]; }
            };
 };
 
@@ -76,7 +76,7 @@ let lshiftGate = (string) => {
 
     return { dependencies: [input1],
              defined: variable,
-             compute: () => { return global[input1] << input2; }
+             compute: (vars) => { return vars[input1] << input2; }
            };
 };
 
@@ -88,7 +88,7 @@ let rshiftGate = (string) => {
 
     return { dependencies: [input1],
              defined: variable,
-             compute: () => { return global[input1] >> input2; }
+             compute: (vars) => { return vars[input1] >> input2; }
            };
 };
 
@@ -99,7 +99,7 @@ let notGate = (string) => {
     
     return { dependencies: [input],
              defined: variable,
-             compute: () => { return ~ global[input]; }
+             compute: (vars) => { return ~ vars[input]; }
            };
 };
 
@@ -129,9 +129,11 @@ let toDeclare = _.transform(circuits, (result, element) => {
     result.push(element.defined);
 }, []);
 
-//Second, declare and set each of these variables to undefined in the global object
+//Second, declare and set each of these variables to undefined in the vars object
+let vars = {};
+
 for (let index = 0; index < toDeclare.length; index++) {
-    global[toDeclare[index]] = undefined;
+    vars[toDeclare[index]] = undefined;
 };
 
 //Third, loop through each circuit until a is defined
@@ -143,35 +145,35 @@ while (true) {
         //log to console the variable defined to see the process at work
         //if one or more of the dependencies are still undefined skip computing the value this time around
         if ( _.transform(circuits[index].dependencies, (result, element) => {
-            if (typeof global[element] == 'undefined') { result.push(element);};
-        }, []).length == 0) { global[circuits[index].defined] = circuits[index].compute();};
+            if (typeof vars[element] == 'undefined') { result.push(element);};
+        }, []).length == 0) { vars[circuits[index].defined] = circuits[index].compute(vars);};
     };
     //if a has been defined we can stop. otherwise keep going
-    if(typeof a !== 'undefined') { break; };
+    if(typeof vars.a !== 'undefined') { break; };
 };
 
-answer.part1 = a; // assign value of a
+answer.part1 = vars.a; // assign value of a
 
 //part 2: assign 3176 to b, reset the other circuits, and compute again.
 
 for (let index = 0; index < toDeclare.length; index++) {
-    global[toDeclare[index]] = undefined;
+    vars[toDeclare[index]] = undefined;
 };
 
-b = 3176;
+vars.b = 3176;
 
 // same, except skip defining b
 while (true) {
     for (let index = 0; index < circuits.length; index++) {
         if ( _.transform(circuits[index].dependencies, (result, element) => {
-            if (typeof global[element] == 'undefined') { result.push(element);};
-        }, []).length == 0 && circuits[index].defined != 'b') { global[circuits[index].defined] = circuits[index].compute();};    
+            if (typeof vars[element] == 'undefined') { result.push(element);};
+        }, []).length == 0 && circuits[index].defined != 'b') { vars[circuits[index].defined] = circuits[index].compute(vars);};    
     };
 
-    if(typeof a !== 'undefined') { break; }; // breaks once a is defined
+    if(typeof vars.a !== 'undefined') { break; }; // breaks once a is defined
 };
 
-answer.part2 = a; // assign a for part 2
+answer.part2 = vars.a; // assign a for part 2
 
 answer.part1;
 answer.part2;
