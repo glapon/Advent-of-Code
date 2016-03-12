@@ -1,7 +1,7 @@
 
 
 "use strict";
-fs = require('fs'); //https://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs
+let fs = require('fs'); //https://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs
 let _ = require('lodash');
 
 let inputFile = "/Users/glapon/Desktop/Advent of Code/Day15/input.txt";
