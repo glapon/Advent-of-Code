@@ -3,7 +3,7 @@ kg OR kf -> kh
 ep OR eo -> eq
 44430 -> b
 NOT gs -> gt
-dd OR do -> dp
+dd OR ddo -> dp
 eg AND ei -> ej
 y AND ae -> ag
 jx AND jz -> ka
@@ -175,10 +175,10 @@ ec AND ee -> ef
 hb LSHIFT 1 -> hv
 kb AND kd -> ke
 x AND ai -> ak
-dd AND do -> dq
+dd AND ddo -> dq
 aq OR ar -> as
 iq OR ip -> ir
-dl AND dn -> do
+dl AND dn -> ddo
 iu RSHIFT 5 -> ix
 as OR bd -> be
 NOT go -> gp
