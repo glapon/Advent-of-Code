@@ -11,41 +11,38 @@ let _ = require('lodash');
 let inputFile = "/Users/glapon/Desktop/Advent of Code/Day8/input.txt"
 
 let literals;
-
+//look at first line, it is auto escaping
 fs.readFile(inputFile, 'utf8', (err, data) => {
     if (err) { return console.log(err); };
     literals = data;
+
+    let arrayLines = literals.split('\n');
+    let arrayChar = literals.split('');
+
+    let literalLength = _.reduce(arrayChar, (result, char, index, array) => {
+        if (char == '\\') { return result + 2; }
+        else if (char == '\n') { return result; }
+        else if (char == '"' && array[index - 1] != '\n' && array[index + 1] != '\n') { return result + 2; } //deals with escaped "
+        else { return result + 1; };
+    }, 0)
+
+    // am i undercounting this? or overcounting the above? or both?
+    let inMemoryLength = _.reduce(arrayLines, (result, line) => {
+        return result + eval(line).length;
+    }, 0);
+
+    let answer = literalLength - inMemoryLength;
+
+    //get 1672, which is too high...remove replace???? Now 2291...getting worse...try 2290 now? 1670 too high
+
+    //remove \n?
+
+
 });
 
-//https://docs.nodejitsu.com/articles/advanced/streams/how-to-use-fs-create-read-stream  but remove \n. how??
-//https://github.com/substack/stream-handbook
-
-
-//this messes up for some reason but I can run it separately...
-
-let arrayLines = literals.split('\n');
-let arrayChar = literals.split('');
 
 //problem: '"\\xa8br\\x8bjr\\""' is escaping the \
 // make \\ = 2
 
 //problem...when splitting into arrayChar, \" is becoming " inside string ...add to if statement to add 1?
 //can i process literals as one chunk? and ignore \n?
-
-let literalLength = _.reduce(arrayChar, (result, char, index, array) => {
-    if (char == '\\') { return result + 2; }
-    else if (char == '\n') { return result; }
-    else if (char == '"' && array[index - 1] != '\n' && array[index + 1] != '\n') { return result + 2; } //deals with escaped "
-    else { return result + 1; };
-}, 0)
-
-// am i undercounting this? or overcounting the above? or both?
-let inMemoryLength = _.reduce(arrayLines, (result, line) => {
-    return result + eval(line).length;
-}, 0);
-
-let answer = literalLength - inMemoryLength;
-
-//get 1672, which is too high...remove replace???? Now 2291...getting worse...try 2290 now? 1670 too high
-
-//remove \n?
